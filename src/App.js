@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PersonAdd from './components/PersonAdd';
 import PersonList from './components/PersonList';
 
 const App = () => {
@@ -8,7 +9,7 @@ const App = () => {
 
   //Fetch Api를 이용해 데이터를 가져온다
   const fetchApi = () => {
-    fetch("https://randomuser.me/api/?results=15")
+    fetch("https://randomuser.me/api/?results=10")
       .then(data => data.json())
       .then(data => setUser(data.results));
   }
@@ -19,13 +20,20 @@ const App = () => {
   }, []);
 
   //배열 데이터를 맵으로 돌려서 JSX로 반환
-  const list = user.map((data) => <li key={data.email}>{data.name.first}</li>)
+  const list = user.map((data) => <h3 key={data.email}>{data.name.first}</h3>)
+
+  console.log(user);
 
   return (
-    <div>
-      <PersonList list={list} />
-    </div>
+    <>
+      <div className="person-add">
+        <PersonAdd />
+      </div>
+      <div className="person-list">
+        <PersonList list={list} />
+      </div>
+    </>
   );
 };
 
-export default App;   
+export default App;
