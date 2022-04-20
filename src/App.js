@@ -20,15 +20,13 @@ const App = () => {
   }, []);
 
   //배열 데이터를 맵으로 돌려서 JSX로 반환
-  const list = user.map((data) => <h3 key={data.email}>{data.name.first}</h3>)
-
-  console.log(user);
+  const list = user.map((data) => (
+    <h3 key={data.email}>{data.name.first}</h3>
+  ))
 
   return (
     <>
-      <div className="person-add">
-        <PersonAdd />
-      </div>
+      <PersonAdd />
       <div className="person-list">
         <PersonList list={list} />
       </div>
