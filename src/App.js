@@ -9,7 +9,7 @@ const App = () => {
 
   //Fetch Api를 이용해 데이터를 가져온다
   const fetchApi = () => {
-    fetch("https://randomuser.me/api/?results=10")
+    fetch("https://randomuser.me/api/?results=5")
       .then(data => data.json())
       .then(data => setUser(data.results));
   }
@@ -19,17 +19,17 @@ const App = () => {
     fetchApi();
   }, []);
 
-  //배열 데이터를 맵으로 돌려서 JSX로 반환
-  const list = user.map((data) => (
-    <h3 key={data.email}>{data.name.first}</h3>
-  ))
+
+  //Person Add에서 새로 추가된 스테이트를 넘겨받자
+  const addPerson = (newItem) => {
+    setUser([newItem, ...user])
+    console.log([newItem, ...user])
+  }
 
   return (
     <>
-      <PersonAdd />
-      <div className="person-list">
-        <PersonList list={list} />
-      </div>
+      <PersonAdd addPerson={addPerson} />
+      <PersonList user={user} />
     </>
   );
 };
